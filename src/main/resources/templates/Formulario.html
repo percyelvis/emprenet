@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - EmpreNet</title>
+
+    <!-- FUENTE -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- ICONOS -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/FormularioStyle.css">
+
+</head>
+<body>
+
+<!-- FONDO -->
+<div class="bg-shape shape1"></div>
+<div class="bg-shape shape2"></div>
+
+<section class="register-section">
+
+    <div class="register-container">
+
+        <!-- FORMULARIO IZQUIERDA -->
+        <div class="register-form-side">
+
+            <form id="formRegistro" class="register-form">
+
+                <div class="form-top">
+
+                    <h2>Crear Cuenta</h2>
+
+                    <p>
+                        Regístrate para comenzar en EmpreNet 🚀
+                    </p>
+
+                </div>
+
+                <!-- NOMBRE -->
+                <div class="input-group">
+
+                    <label>
+                        Nombre completo
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <input type="text"
+                               id="nombre"
+                               placeholder="Ingresa tu nombre"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <!-- EMAIL -->
+                <div class="input-group">
+
+                    <label>
+                        Correo electrónico
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <input type="email"
+                               id="email"
+                               placeholder="correo@ejemplo.com"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="input-group">
+
+                    <label>
+                        Contraseña
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input type="password"
+                               id="password"
+                               placeholder="********"
+                               required>
+
+                        <button type="button"
+                                class="toggle-password"
+                                id="togglePassword">
+
+                            <i class="fa-solid fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- ROL -->
+                <div class="input-group">
+
+                    <label>
+                        Tipo de cuenta
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-user-shield"></i>
+
+                        <select id="rol">
+
+                            <option value="USER">
+                                Usuario
+                            </option>
+
+                            <option value="ADMIN">
+                                Administrador
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- BOTON -->
+                <button type="submit" class="btn-submit">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    Crear Cuenta
+
+                </button>
+
+                <!-- MENSAJE -->
+                <p id="mensaje"></p>
+
+                <!-- LOGIN -->
+                <div class="extra">
+
+                    ¿Ya tienes una cuenta?
+
+                    <a href="/login">
+                        Inicia sesión
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+        <!-- DERECHA -->
+        <div class="register-info">
+
+            <div class="glass-card">
+
+                <div class="brand">
+
+                    <i class="fa-solid fa-store"></i>
+
+                    <h1>
+                        Empre<span>Net</span>
+                    </h1>
+
+                </div>
+
+                <h2>
+                    Únete al futuro
+                    <span>digital</span>
+                </h2>
+
+                <p>
+                    Compra, vende y conecta con miles de emprendedores
+                    usando una plataforma moderna, rápida y segura
+                    diseñada para el Perú.
+                </p>
+
+                <div class="features">
+
+                    <div class="feature">
+
+                        <i class="fa-solid fa-bolt"></i>
+
+                        <span>
+                            Publica productos en segundos
+                        </span>
+
+                    </div>
+
+                    <div class="feature">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        <span>
+                            Seguridad garantizada
+                        </span>
+
+                    </div>
+
+                    <div class="feature">
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                        <span>
+                            Haz crecer tu negocio
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+
+    // MOSTRAR / OCULTAR PASSWORD
+
+    const togglePassword =
+        document.getElementById("togglePassword");
+
+    const password =
+        document.getElementById("password");
+
+    togglePassword.addEventListener("click", () => {
+
+        const type =
+            password.getAttribute("type") === "password"
+                ? "text"
+                : "password";
+
+        password.setAttribute("type", type);
+
+        togglePassword.innerHTML =
+            type === "password"
+                ? '<i class="fa-solid fa-eye"></i>'
+                : '<i class="fa-solid fa-eye-slash"></i>';
+    });
+
+</script>
+
+<script src="/FormularioScrip.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Mi Perfil - EmpreNet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="/perfilStyle.css">
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="container nav-content">
+
+    <div class="logo">Empre<span>Net</span></div>
+
+    <nav class="nav-links">
+      <a href="/dashboard" class="nav-item">Inicio</a>
+      <a href="#" class="nav-item">Categorías</a>
+      <a href="/carrito" class="nav-item">Carrito</a>
+      <a href="/perfil" class="nav-item active">Perfil</a>
+    </nav>
+
+    <div class="profile-mini">
+      <div class="profile-avatar">P</div>
+      <div class="profile-mini-info">
+        <strong id="miniName">Usuario</strong>
+        <span>Emprendedor</span>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<section class="container profile-section">
+
+  <!-- LEFT -->
+  <div class="profile-left">
+
+    <div class="profile-card">
+
+      <div class="profile-cover"></div>
+
+      <div class="profile-content">
+
+        <div class="profile-avatar-large">P</div>
+
+        <h2 id="nombrePerfil">Usuario</h2>
+        <p class="profile-role">Emprendedor Digital</p>
+
+        <div class="profile-stats">
+          <div class="stat-box"><h3 id="countProd">0</h3><span>Productos</span></div>
+          <div class="stat-box"><h3>0</h3><span>Ventas</span></div>
+          <div class="stat-box"><h3>5.0</h3><span>Rating</span></div>
+        </div>
+
+        <button class="btn btn-primary">
+          <i class="fa-solid fa-pen"></i>
+          Editar Perfil
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- RIGHT -->
+  <div class="profile-right">
+
+    <!-- INFO -->
+    <div class="info-card">
+
+      <div class="card-header">
+        <h3>Información personal</h3>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <span>Nombre</span>
+          <strong id="nombreInfo">-</strong>
+        </div>
+
+        <div class="info-item">
+          <span>Correo</span>
+          <strong id="emailInfo">-</strong>
+        </div>
+
+        <div class="info-item">
+          <span>Rol</span>
+          <strong id="rolInfo">-</strong>
+        </div>
+
+        <div class="info-item">
+          <span>Miembro desde</span>
+          <strong>-</strong>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PRODUCTOS -->
+    <div class="info-card">
+
+      <div class="card-header">
+
+        <h3>Mis productos</h3>
+
+        <button class="btn-mini" onclick="abrirModal()">
+          <i class="fa-solid fa-plus"></i>
+          Publicar
+        </button>
+
+      </div>
+
+      <div class="products-mini-grid" id="productosGrid"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 🔥 MODAL CREAR PRODUCTO -->
+<div class="modal" id="modalProducto">
+
+  <div class="modal-content">
+
+    <h2>Crear Producto</h2>
+
+    <input type="text" id="nombre" placeholder="Nombre">
+    <input type="text" id="descripcion" placeholder="Descripción">
+    <input type="number" id="precio" placeholder="Precio">
+    <input type="text" id="imagen" placeholder="URL de imagen">
+
+    <div class="modal-actions">
+      <button onclick="cerrarModal()">Cancelar</button>
+      <button onclick="guardarProducto()">Guardar</button>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+  // 👤 USUARIO LOGUEADO
+  fetch("/usuarios/me")
+          .then(r => r.json())
+          .then(u => {
+
+            if(!u) return;
+
+            document.getElementById("miniName").innerText = u.nombre;
+            document.getElementById("nombrePerfil").innerText = u.nombre;
+            document.getElementById("nombreInfo").innerText = u.nombre;
+            document.getElementById("emailInfo").innerText = u.email;
+            document.getElementById("rolInfo").innerText = u.rol;
+
+          });
+
+  // 📦 PRODUCTOS
+  function cargarProductos() {
+
+    fetch("/productos")
+            .then(r => r.json())
+            .then(data => {
+
+              let grid = document.getElementById("productosGrid");
+              grid.innerHTML = "";
+
+              document.getElementById("countProd").innerText = data.length;
+
+              data.forEach(p => {
+
+                grid.innerHTML += `
+            <div class="mini-product">
+              <img src="${p.imagen || 'https://picsum.photos/300/200'}">
+              <div class="mini-product-info">
+                <h4>${p.nombre}</h4>
+                <span>S/ ${p.precio}</span>
+              </div>
+            </div>
+          `;
+
+              });
+
+            });
+
+  }
+
+  cargarProductos();
+
+  // 🔥 MODAL
+  function abrirModal(){
+    document.getElementById("modalProducto").classList.add("active");
+  }
+
+  function cerrarModal(){
+    document.getElementById("modalProducto").classList.remove("active");
+  }
+
+  // 💾 GUARDAR PRODUCTO
+  function guardarProducto(){
+
+    let producto = {
+      nombre: document.getElementById("nombre").value,
+      descripcion: document.getElementById("descripcion").value,
+      precio: document.getElementById("precio").value,
+      estado: "ACTIVO",
+
+      // 🔥 CLAVE
+      imagenes: [
+        {
+          ruta: document.getElementById("imagen").value
+        }
+      ]
+    };
+
+    fetch("/productos", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify(producto)
+    })
+            .then(() => {
+              cerrarModal();
+              cargarProductos();
+            });
+  }
+    document.addEventListener("DOMContentLoaded", async () => {
+
+    try {
+    const res = await fetch("/api/usuario/me");
+
+    if (!res.ok) {
+    window.location.href = "/login";
+    return;
+  }
+
+    const user = await res.json();
+
+    // 🔥 Navbar
+    document.querySelector(".profile-mini-info strong").innerText = user.nombre;
+    document.querySelector(".profile-mini-info span").innerText = user.rol;
+
+    // 🔥 Perfil grande
+    document.querySelector(".profile-content h2").innerText = user.nombre;
+
+    // 🔥 Info card
+    const infoItems = document.querySelectorAll(".info-item strong");
+
+    infoItems[0].innerText = user.nombre;
+    infoItems[1].innerText = user.email;
+    infoItems[2].innerText = user.rol;
+
+  } catch (err) {
+    console.error("Error cargando usuario", err);
+  }
+
+  });
+
+</script>
+
+</body>
+</html>

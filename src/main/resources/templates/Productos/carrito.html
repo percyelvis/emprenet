@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito - EmpreNet</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FUENTE -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- ICONOS -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/carritoStyle.css">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+
+    <div class="container nav-content">
+
+        <div class="logo">
+            Empre<span>Net</span>
+        </div>
+
+        <nav class="nav-links">
+
+            <a href="/dashboard" class="nav-item">
+                Inicio
+            </a>
+
+            <a href="#" class="nav-item">
+                Categorías
+            </a>
+
+            <a href="/carrito" class="nav-item active">
+                Carrito
+            </a>
+
+            <a href="/perfil" class="nav-item">
+                Perfil
+            </a>
+
+        </nav>
+
+        <!-- SEARCH -->
+        <div class="search-box">
+
+            <button class="search-btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+
+            <input type="text"
+                   placeholder="Buscar en carrito...">
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- CONTENIDO -->
+<section class="container cart-section">
+
+    <div class="cart-header">
+
+        <div>
+            <h1>
+                Mi carrito
+            </h1>
+
+            <p>
+                Revisa tus productos antes de continuar
+            </p>
+        </div>
+
+        <div class="cart-badge">
+            <i class="fa-solid fa-cart-shopping"></i>
+            3 productos
+        </div>
+
+    </div>
+
+    <div class="cart-layout">
+
+        <!-- PRODUCTOS -->
+        <div class="cart-products">
+
+            <!-- ITEM -->
+            <div class="cart-item">
+
+                <div class="cart-image">
+                    <img src="https://picsum.photos/300/300?random=1"
+                         alt="producto">
+                </div>
+
+                <div class="cart-info">
+
+                    <span class="cart-category">
+                        Tecnología
+                    </span>
+
+                    <h3>
+                        Audífonos Gamer RGB
+                    </h3>
+
+                    <p>
+                        Sonido envolvente premium para gaming y streaming.
+                    </p>
+
+                    <div class="cart-actions">
+
+                        <div class="quantity-box">
+
+                            <button>-</button>
+
+                            <span>1</span>
+
+                            <button>+</button>
+
+                        </div>
+
+                        <button class="remove-btn">
+
+                            <i class="fa-solid fa-trash"></i>
+
+                            Eliminar
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="cart-price">
+
+                    <span>
+                        S/ 149.90
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- ITEM -->
+            <div class="cart-item">
+
+                <div class="cart-image">
+                    <img src="https://picsum.photos/300/300?random=2"
+                         alt="producto">
+                </div>
+
+                <div class="cart-info">
+
+                    <span class="cart-category">
+                        Moda
+                    </span>
+
+                    <h3>
+                        Casaca Oversize
+                    </h3>
+
+                    <p>
+                        Diseño moderno y cómodo para uso diario.
+                    </p>
+
+                    <div class="cart-actions">
+
+                        <div class="quantity-box">
+
+                            <button>-</button>
+
+                            <span>2</span>
+
+                            <button>+</button>
+
+                        </div>
+
+                        <button class="remove-btn">
+
+                            <i class="fa-solid fa-trash"></i>
+
+                            Eliminar
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="cart-price">
+
+                    <span>
+                        S/ 89.90
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RESUMEN -->
+        <div class="summary-card">
+
+            <h2>
+                Resumen
+            </h2>
+
+            <div class="summary-row">
+
+                <span>Subtotal</span>
+
+                <strong id="subtotal">
+                    S/ 0.00
+                </strong>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>Envío</span>
+
+                <strong>Gratis</strong>
+
+            </div>
+
+            <div class="summary-row total">
+
+                <span>Total</span>
+
+                <strong id="total">
+                    S/ 0.00
+                </strong>
+
+            </div>
+
+            <button class="btn btn-primary checkout-btn"
+                    onclick="abrirPago()">
+
+                <i class="fa-solid fa-credit-card"></i>
+
+                Proceder al pago
+
+            </button>
+
+            <a href="/dashboard" class="continue-shopping">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Seguir comprando
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- MODAL PAGO -->
+
+<div class="payment-modal" id="paymentModal">
+
+    <div class="payment-overlay"
+         onclick="cerrarPago()"></div>
+
+    <div class="payment-content">
+
+        <!-- CERRAR -->
+        <button class="payment-close"
+                onclick="cerrarPago()">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+        <!-- PASO 1 -->
+        <div id="paymentStep">
+
+            <div class="payment-header">
+
+                <h2>
+                    Finalizar compra
+                </h2>
+
+                <p>
+                    Selecciona un método de pago
+                </p>
+
+            </div>
+
+            <!-- METODOS -->
+
+            <div class="payment-methods">
+
+                <button type="button" class="method-card active" onclick="cambiarMetodo('tarjeta', this)">
+                    <i class="fa-brands fa-cc-visa"></i>
+                    Tarjeta
+                </button>
+
+                <button type="button" class="method-card" onclick="cambiarMetodo('yape', this)">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                    Yape
+                </button>
+
+                <button type="button" class="method-card" onclick="cambiarMetodo('plin', this)">
+                    <i class="fa-solid fa-qrcode"></i>
+                    Plin
+                </button>
+
+                <button type="button" class="method-card" onclick="cambiarMetodo('paypal', this)">
+                    <i class="fa-brands fa-paypal"></i>
+                    PayPal
+                </button>
+
+                <button type="button" class="method-card" onclick="cambiarMetodo('bcp', this)">
+                    <i class="fa-solid fa-building-columns"></i>
+                    BCP
+                </button>
+
+            </div>
+            <!-- FORM -->
+
+            <div class="payment-form">
+
+                <div class="input-group">
+
+                    <label>
+                        Número de tarjeta
+                    </label>
+
+                    <input type="text"
+                           placeholder="**** **** **** 1234">
+
+                </div>
+
+                <div class="double-input">
+
+                    <div class="input-group">
+
+                        <label>
+                            Expiración
+                        </label>
+
+                        <input type="text"
+                               placeholder="MM/AA">
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>
+                            CVV
+                        </label>
+
+                        <input type="text"
+                               placeholder="123">
+
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>
+                        Nombre del titular
+                    </label>
+
+                    <input type="text"
+                           placeholder="Percy Elvis">
+
+                </div>
+
+            </div>
+
+            <button class="btn btn-primary pay-btn"
+                    onclick="procesarPago()">
+
+                <i class="fa-solid fa-lock"></i>
+
+                Pagar ahora
+
+            </button>
+
+        </div>
+
+        <!-- PASO 2 -->
+
+        <div class="processing-payment"
+             id="processingPayment">
+
+            <div class="loader-circle"></div>
+
+            <h2>
+                Procesando pago...
+            </h2>
+
+            <p>
+                Estamos verificando tu transacción
+            </p>
+
+            <div class="progress-bar">
+
+                <div class="progress-fill"></div>
+
+            </div>
+
+        </div>
+
+        <!-- PASO 3 -->
+
+        <div class="success-payment"
+             id="successPayment">
+
+            <div class="success-icon">
+                <i class="fa-solid fa-check"></i>
+            </div>
+
+            <h2>
+                ¡Pago exitoso!
+            </h2>
+
+            <p>
+                Tu pedido fue procesado correctamente.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-bottom-nav">
+
+    <a href="/dashboard" class="mobile-nav-link">
+
+        <i class="fa-solid fa-house"></i>
+
+        <span>Inicio</span>
+
+    </a>
+
+    <a href="#" class="mobile-nav-link">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <span>Buscar</span>
+
+    </a>
+
+    <a href="/carrito" class="mobile-nav-link active">
+
+        <i class="fa-solid fa-cart-shopping"></i>
+
+        <span>Carrito</span>
+
+    </a>
+
+    <a href="/perfil" class="mobile-nav-link">
+
+        <i class="fa-solid fa-user"></i>
+
+        <span>Perfil</span>
+
+    </a>
+
+</div>
+<script>
+
+    let carrito =
+        JSON.parse(localStorage.getItem("carrito")) || [];
+
+    let contenedor =
+        document.querySelector(".cart-products");
+
+    let subtotal = 0;
+
+    contenedor.innerHTML = "";
+
+    carrito.forEach((p, index) => {
+
+        subtotal += p.precio * p.cantidad;
+
+        contenedor.innerHTML += `
+
+            <div class="cart-item">
+
+                <div class="cart-image">
+                    <img src="${p.imagen}" alt="">
+                </div>
+
+                <div class="cart-info">
+
+                    <span class="cart-category">
+                        Producto
+                    </span>
+
+                    <h3>${p.nombre}</h3>
+
+                    <p>
+                        ${p.descripcion || ""}
+                    </p>
+
+                    <div class="cart-actions">
+
+                        <div class="quantity-box">
+
+                            <button onclick="cambiarCantidad(${index}, -1)">
+                                -
+                            </button>
+
+                            <span>${p.cantidad}</span>
+
+                            <button onclick="cambiarCantidad(${index}, 1)">
+                                +
+                            </button>
+
+                        </div>
+
+                        <button class="remove-btn"
+                                onclick="eliminarProducto(${index})">
+
+                            <i class="fa-solid fa-trash"></i>
+
+                            Eliminar
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="cart-price">
+
+                    <span>
+                        S/ ${(p.precio * p.cantidad).toFixed(2)}
+                    </span>
+
+                </div>
+
+            </div>
+
+        `;
+    });
+
+    document.getElementById("subtotal")
+        .innerText = "S/ " + subtotal.toFixed(2);
+
+    document.getElementById("total")
+        .innerText = "S/ " + subtotal.toFixed(2);
+
+    // ELIMINAR
+
+    function eliminarProducto(index){
+
+        carrito.splice(index, 1);
+
+        localStorage.setItem(
+            "carrito",
+            JSON.stringify(carrito)
+        );
+
+        location.reload();
+    }
+
+    // CANTIDAD
+
+    function cambiarCantidad(index, cambio){
+
+        carrito[index].cantidad += cambio;
+
+        if(carrito[index].cantidad <= 0){
+
+            carrito.splice(index, 1);
+        }
+
+        localStorage.setItem(
+            "carrito",
+            JSON.stringify(carrito)
+        );
+
+        location.reload();
+    }
+
+    function abrirPago(){
+
+        document.getElementById("paymentModal")
+            .classList.add("active");
+
+        document.body.style.overflow = "hidden";
+    }
+
+    function cerrarPago(){
+
+        document.getElementById("paymentModal")
+            .classList.remove("active");
+
+        document.body.style.overflow = "auto";
+    }
+
+    function procesarPago() {
+
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+        if (carrito.length === 0) {
+            alert("El carrito está vacío");
+            return;
+        }
+
+        const total = carrito.reduce((sum, p) =>
+            sum + (p.precio * p.cantidad), 0
+        );
+
+        document.getElementById("paymentStep").style.display = "none";
+        document.getElementById("processingPayment").style.display = "flex";
+
+        fetch("/api/pago/crear-con-venta", {
+            method: "POST",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                carrito: carrito,
+                total: total
+            })
+        })
+            .then(res => {
+                if (!res.ok) throw new Error("Error HTTP");
+                return res.json();
+            })
+            .then(data => {
+
+                console.log("Pago creado:", data);
+
+                if (!data || !data.id) {
+                    alert("Error al crear pago");
+                    return;
+                }
+
+                setTimeout(() => {
+
+                    document.getElementById("processingPayment").style.display = "none";
+                    document.getElementById("successPayment").style.display = "flex";
+
+                    // 🧹 LIMPIEZA AUTOMÁTICA COMPLETA
+                    localStorage.removeItem("carrito");
+
+                    // 🧠 opcional: reset visual inmediato
+                    document.querySelector(".cart-products").innerHTML = "";
+                    document.getElementById("subtotal").innerText = "S/ 0.00";
+                    document.getElementById("total").innerText = "S/ 0.00";
+
+                    // 💳 confirmar pago backend
+                    fetch("/api/pago/confirmar/" + data.id, {
+                        method: "PUT",
+                        credentials: "same-origin"
+                    });
+
+                }, 2500);
+
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Error al procesar pago");
+
+                document.getElementById("paymentStep").style.display = "block";
+                document.getElementById("processingPayment").style.display = "none";
+            });
+    }
+
+
+    let metodoActual = "tarjeta";
+
+    function cambiarMetodo(metodo, btn) {
+
+        metodoActual = metodo;
+
+        // quitar active de todos
+        document.querySelectorAll(".method-card")
+            .forEach(b => b.classList.remove("active"));
+
+        // activar el seleccionado
+        btn.classList.add("active");
+
+        const form = document.querySelector(".payment-form");
+
+        let html = "";
+
+        if (metodo === "tarjeta") {
+
+            html = `
+            <div class="input-group">
+                <label>Número de tarjeta</label>
+                <input type="text" placeholder="**** **** **** 1234">
+            </div>
+
+            <div class="double-input">
+                <div class="input-group">
+                    <label>Expiración</label>
+                    <input type="text" placeholder="MM/AA">
+                </div>
+
+                <div class="input-group">
+                    <label>CVV</label>
+                    <input type="text" placeholder="123">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Nombre del titular</label>
+                <input type="text">
+            </div>
+        `;
+        }
+
+        else if (metodo === "yape" || metodo === "plin") {
+
+            html = `
+            <div class="input-group">
+                <label>Número de celular</label>
+                <input type="text" placeholder="999 999 999">
+            </div>
+        `;
+        }
+
+        else if (metodo === "paypal") {
+
+            html = `
+            <div class="input-group">
+                <label>Email PayPal</label>
+                <input type="email" placeholder="correo@paypal.com">
+            </div>
+        `;
+        }
+
+        else if (metodo === "bcp") {
+
+            html = `
+            <div class="input-group">
+                <label>CCI</label>
+                <input type="text" placeholder="002-xxxx-xxxx">
+            </div>
+
+            <div class="input-group">
+                <label>DNI</label>
+                <input type="text" placeholder="12345678">
+            </div>
+        `;
+        }
+
+        form.innerHTML = html;
+    }
+
+    // iniciar con tarjeta
+    cambiarMetodo("tarjeta", document.querySelector(".method-card"));
+
+</script>
+</body>
+
+</html>

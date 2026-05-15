@@ -1,0 +1,26 @@
+# Maven
+target/
+.mvn/
+
+# IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings
+
+# Logs
+*.log
+
+# System
+.DS_Store
+
+# Build
+build/
+
+# Package files (opcional si no quieres subir binarios)
+*.jar
+*.war
+*.ear

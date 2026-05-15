@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - EmpreNet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FUENTE -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- ICONOS -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/LoginStyle.css">
+</head>
+<body>
+
+<!-- FONDO -->
+<div class="bg-shape shape1"></div>
+<div class="bg-shape shape2"></div>
+
+<!-- MODAL LOADING -->
+<div class="loading-modal" id="loadingModal">
+    <div class="loading-box">
+
+        <div class="loader"></div>
+
+        <h3>Verificando acceso...</h3>
+
+        <p>Estamos validando tus credenciales</p>
+
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ALERTA -->
+<div class="alert-box error-alert" id="errorAlert">
+    <i class="fa-solid fa-circle-exclamation"></i>
+    <span>Credenciales incorrectas</span>
+</div>
+
+<!-- CONTENEDOR -->
+<div class="login-container">
+
+    <!-- IZQUIERDA -->
+    <div class="login-left">
+
+        <div class="glass-card">
+
+            <div class="brand">
+                <i class="fa-solid fa-store"></i>
+                <h1><span>Empre</span>Net</h1>
+            </div>
+
+            <h2>
+                Compra, vende y crece
+                <span>sin límites</span>
+            </h2>
+
+            <p>
+                Marketplace moderno para emprendedores peruanos.
+                Seguro, rápido y elegante.
+            </p>
+
+            <div class="features">
+
+                <div class="feature">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Pagos Seguros</span>
+                </div>
+
+                <div class="feature">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Ventas Rápidas</span>
+                </div>
+
+                <div class="feature">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Crecimiento Digital</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- DERECHA -->
+    <div class="login-right">
+
+        <form action="/login"
+              method="post"
+              class="login-form"
+              id="loginForm">
+
+            <div class="form-top">
+
+                <h2>Iniciar Sesión</h2>
+
+                <p>
+                    Bienvenido nuevamente
+                </p>
+
+            </div>
+
+            <!-- EMAIL -->
+            <div class="input-group">
+
+                <label>Correo electrónico</label>
+
+                <div class="input-box">
+                    <i class="fa-regular fa-envelope"></i>
+
+                    <input type="email"
+                           name="email"
+                           placeholder="correo@ejemplo.com"
+                           required>
+                </div>
+
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="input-group">
+
+                <label>Contraseña</label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input type="password"
+                           name="password"
+                           placeholder="********"
+                           id="password"
+                           required>
+
+                    <button type="button"
+                            class="toggle-password"
+                            id="togglePassword">
+
+                        <i class="fa-regular fa-eye"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="options">
+
+                <label class="remember">
+                    <input type="checkbox">
+                    <span>Recordarme</span>
+                </label>
+
+                <a href="#">¿Olvidaste tu contraseña?</a>
+
+            </div>
+
+            <!-- BOTON -->
+            <button type="submit" class="btn-login">
+
+                <span>Ingresar</span>
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+            <div class="divider">
+                <span>o continuar con</span>
+            </div>
+
+            <!-- LOGIN SOCIAL -->
+            <div class="social-login">
+
+                <button type="button" class="social-btn">
+                    <i class="fa-brands fa-google"></i>
+                </button>
+
+                <button type="button" class="social-btn">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </button>
+
+                <button type="button" class="social-btn">
+                    <i class="fa-brands fa-apple"></i>
+                </button>
+
+            </div>
+
+            <p class="extra">
+                ¿No tienes cuenta?
+                <a href="/register">Crear cuenta</a>
+            </p>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- SCRIPT -->
+<script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+        // MODAL LOADING
+        const form = document.getElementById("loginForm");
+        const modal = document.getElementById("loadingModal");
+
+        if (form && modal) {
+
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                modal.classList.add("active");
+
+                setTimeout(() => {
+                    form.submit();
+                }, 2000); // más rápido (4s era demasiado)
+            });
+
+        }
+
+
+        // MOSTRAR / OCULTAR PASSWORD
+        const togglePassword = document.getElementById("togglePassword");
+        const password = document.getElementById("password");
+
+        if (togglePassword && password) {
+
+            togglePassword.addEventListener("click", () => {
+
+                const isHidden = password.type === "password";
+
+                password.type = isHidden ? "text" : "password";
+
+                togglePassword.innerHTML = isHidden
+                    ? '<i class="fa-regular fa-eye-slash"></i>'
+                    : '<i class="fa-regular fa-eye"></i>';
+
+            });
+
+        }
+
+
+        // ALERTA ERROR
+        const params = new URLSearchParams(window.location.search);
+        const alert = document.getElementById("errorAlert");
+
+        if (params.get("error") && alert) {
+
+            alert.classList.add("show");
+
+            setTimeout(() => {
+                alert.classList.remove("show");
+            }, 4000);
+
+        }
+
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>EmpreNet</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FUENTE -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- ICONOS -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/home.css">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+
+    <div class="container nav-content">
+
+        <div class="logo">
+            Empre<span>Net</span>
+        </div>
+
+        <nav class="nav-links">
+
+            <a href="/dashboard" class="nav-item active">
+                Inicio
+            </a>
+
+            <a href="#" class="nav-item">
+                Categorías
+            </a>
+
+            <a href="/carrito" class="nav-item">
+                Carrito
+            </a>
+
+            <a href="/perfil" class="nav-item">
+                Perfil
+            </a>
+
+        </nav>
+
+
+        <!-- SEARCH -->
+        <div class="search-box">
+
+            <button class="search-btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+
+            <input type="text"
+                   placeholder="Buscar productos..."
+                   onkeyup="buscar(this.value)">
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- HERO -->
+<section class="container hero-section">
+
+    <div class="hero-content">
+
+        <div class="hero-badge">
+
+            <i class="fa-solid fa-fire"></i>
+
+            Marketplace moderno para emprendedores
+
+        </div>
+
+        <h1>
+            Descubre productos
+            <span>únicos</span>
+        </h1>
+
+        <p>
+            Encuentra productos increíbles publicados por emprendedores,
+            negocios y tiendas digitales en una experiencia moderna,
+            rápida y elegante.
+        </p>
+
+        <div class="hero-btns">
+
+            <a href="#productos" class="btn btn-primary">
+
+                <i class="fa-solid fa-bag-shopping"></i>
+
+                Explorar
+
+            </a>
+
+            <a href="#" class="btn btn-secondary">
+
+                <i class="fa-solid fa-store"></i>
+
+                Vender
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- HERO IMAGE -->
+    <div class="hero-image">
+
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1200&auto=format&fit=crop"
+             alt="Hero">
+
+    </div>
+
+</section>
+
+<!-- PRODUCTOS -->
+<section class="container" id="productos">
+
+    <div class="section-header">
+
+        <div class="header-flex">
+
+            <div>
+
+                <h2>
+                    Productos destacados
+                </h2>
+
+                <p>
+                    Explora los productos más recientes
+                </p>
+
+            </div>
+
+            <!-- FILTROS -->
+            <div class="filter-group">
+
+                <button class="filter-chip active">
+                    Todos
+                </button>
+
+                <button class="filter-chip">
+                    Tecnología
+                </button>
+
+                <button class="filter-chip">
+                    Moda
+                </button>
+
+                <button class="filter-chip">
+                    Hogar
+                </button>
+
+                <button class="filter-chip">
+                    Gaming
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- GRID -->
+    <div class="product-grid" id="grid"></div>
+
+</section>
+
+<!-- MOBILE NAV -->
+<div class="mobile-bottom-nav">
+
+    <a href="/dashboard" class="mobile-nav-link active">
+
+        <i class="fa-solid fa-house"></i>
+
+        <span>Inicio</span>
+
+    </a>
+
+    <a href="#" class="mobile-nav-link">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <span>Buscar</span>
+
+    </a>
+
+    <a href="/carrito" class="mobile-nav-link">
+
+        <i class="fa-solid fa-cart-shopping"></i>
+
+        <span>Carrito</span>
+
+    </a>
+
+    <a href="/perfil" class="mobile-nav-link">
+
+        <i class="fa-solid fa-user"></i>
+
+        <span>Perfil</span>
+
+    </a>
+
+</div>
+
+<!-- MODAL -->
+<div class="product-modal" id="productModal">
+
+    <div class="modal-overlay" onclick="cerrarModal()"></div>
+
+    <div class="modal-content">
+
+        <!-- CLOSE -->
+        <button class="modal-close" onclick="cerrarModal()">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+        <!-- IMAGE -->
+        <div class="modal-image">
+
+            <img id="modalImg"
+                 src=""
+                 alt="producto">
+
+        </div>
+
+        <!-- INFO -->
+        <div class="modal-info">
+
+            <span class="modal-category">
+                Producto destacado
+            </span>
+
+            <h2 id="modalNombre">
+                Producto
+            </h2>
+
+            <p id="modalDescripcion">
+                Descripción
+            </p>
+
+            <div class="modal-price" id="modalPrecio">
+                S/ 0.00
+            </div>
+
+            <div class="modal-actions">
+
+                <button class="btn btn-primary"
+                        onclick="comprarAhora()">
+
+                    <i class="fa-solid fa-bag-shopping"></i>
+
+                    Comprar ahora
+
+                </button>
+
+                <button class="btn btn-secondary"
+                        id="btnAgregarCarrito">
+
+                    <i class="fa-solid fa-cart-plus"></i>
+
+                    Agregar
+
+                </button>
+
+            </div>
+
+            <div class="modal-features">
+
+                <div class="modal-feature">
+
+                    <i class="fa-solid fa-truck-fast"></i>
+
+                    <span>Envío rápido</span>
+
+                </div>
+
+                <div class="modal-feature">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <span>Compra segura</span>
+
+                </div>
+
+                <div class="modal-feature">
+
+                    <i class="fa-solid fa-star"></i>
+
+                    <span>Producto recomendado</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- SCRIPT -->
+<script>
+
+    let productosGlobal = [];
+
+    document.addEventListener("DOMContentLoaded", () => {
+        cargarProductos();
+    });
+
+    // CARGAR PRODUCTOS
+
+    function cargarProductos() {
+
+        fetch("/productos")
+            .then(res => res.json())
+            .then(data => {
+
+                productosGlobal = data;
+
+                mostrarProductos(data);
+
+            })
+            .catch(err => console.error("Error:", err));
+    }
+
+    // MOSTRAR PRODUCTOS
+
+    function mostrarProductos(data) {
+
+        let grid = document.getElementById("grid");
+
+        grid.innerHTML = "";
+
+        data.forEach((p, index) => {
+
+            let img = (p.imagenes && p.imagenes.length > 0)
+                ? p.imagenes[0].ruta
+                : `https://picsum.photos/500/400?random=${p.id}`;
+
+            let descripcion = p.descripcion
+                ? p.descripcion.replace(/'/g, "")
+                : "";
+
+            let nombre = p.nombre
+                ? p.nombre.replace(/'/g, "")
+                : "";
+
+            grid.innerHTML += `
+
+                <div class="card-product"
+                     style="
+                        animation: fadeIn .5s ease forwards;
+                        animation-delay:${index * 0.05}s;
+                        opacity:0;
+                     ">
+
+                    <div class="img-container">
+
+                        <img src="${img}" alt="producto">
+
+                        <button class="wishlist-btn">
+
+                            <i class="fa-regular fa-heart"></i>
+
+                        </button>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <span class="category-tag">
+                            Producto
+                        </span>
+
+                        <h3 class="card-title">
+                            ${nombre}
+                        </h3>
+
+                        <p class="card-description">
+                            ${descripcion}
+                        </p>
+
+                        <div class="price-box">
+
+                            <div class="current-price">
+                                S/ ${p.precio}
+                            </div>
+
+                            <div class="card-actions">
+
+                                <button class="add-cart-btn"
+                                        onclick="agregarCarrito(${p.id})">
+
+                                    <i class="fa-solid fa-cart-plus"></i>
+
+                                </button>
+
+                                <button class="btn btn-primary btn-view"
+
+                                    onclick='abrirModal(
+                                        ${p.id},
+                                        "${nombre}",
+                                        "${descripcion}",
+                                        "${p.precio}",
+                                        "${img}"
+                                    )'>
+
+                                    Ver
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+        });
+    }
+
+    // MODAL
+
+    function abrirModal(id, nombre, descripcion, precio, img){
+
+        document.getElementById("productModal")
+            .classList.add("active");
+
+        document.getElementById("modalImg")
+            .src = img;
+
+        document.getElementById("modalNombre")
+            .innerText = nombre;
+
+        document.getElementById("modalDescripcion")
+            .innerText =
+            descripcion || "Producto disponible en EmpreNet.";
+
+        document.getElementById("modalPrecio")
+            .innerText = "S/ " + precio;
+
+        document.getElementById("btnAgregarCarrito")
+            .setAttribute(
+                "onclick",
+                `agregarCarrito(${id})`
+            );
+
+        document.body.style.overflow = "hidden";
+    }
+
+    function cerrarModal(){
+
+        document.getElementById("productModal")
+            .classList.remove("active");
+
+        document.body.style.overflow = "auto";
+    }
+
+    // CERRAR CON ESC
+
+    document.addEventListener("keydown", (e)=>{
+
+        if(e.key === "Escape"){
+            cerrarModal();
+        }
+
+    });
+
+    // BUSCADOR
+
+    function buscar(texto) {
+
+        let filtrados = productosGlobal.filter(p =>
+            p.nombre.toLowerCase()
+                .includes(texto.toLowerCase())
+        );
+
+        mostrarProductos(filtrados);
+    }
+
+    // CARRITO
+
+
+    function agregarCarrito(id) {
+
+        let carrito =
+            JSON.parse(localStorage.getItem("carrito")) || [];
+
+        let producto =
+            productosGlobal.find(p => p.id === id);
+
+        if(!producto){
+            return;
+        }
+
+        let existe =
+            carrito.find(item => item.id === id);
+
+        if(existe){
+
+            existe.cantidad += 1;
+
+        }else{
+
+            carrito.push({
+                id: producto.id,
+                nombre: producto.nombre,
+                precio: producto.precio,
+                descripcion: producto.descripcion,
+                imagen: producto.imagenes &&
+                producto.imagenes.length > 0
+                    ? producto.imagenes[0].ruta
+                    : `https://picsum.photos/500/400?random=${producto.id}`,
+                cantidad: 1
+            });
+        }
+
+        localStorage.setItem(
+            "carrito",
+            JSON.stringify(carrito)
+        );
+
+        alert("Producto agregado al carrito 🛒");
+    }
+
+    // COMPRAR
+
+    function comprarAhora(){
+
+        alert("Próximamente");
+    }
+
+</script>
+
+</body>
+
+</html>

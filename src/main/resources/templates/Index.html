@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EmpreNet</title>
+
+  <link rel="stylesheet" href="/StyleIndex.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+
+  <div class="logo">
+    <span>Empre</span>Net
+  </div>
+
+  <ul class="menu" id="menu">
+    <li><a href="#">Inicio</a></li>
+    <li><a href="#">Nosotros</a></li>
+    <li><a href="#">Servicios</a></li>
+    <li><a href="#">Contacto</a></li>
+  </ul>
+
+  <div class="nav-buttons">
+    <a href="/login" class="btn-outline">Ingresar</a>
+    <a href="/register" class="btn-primary">Registrarse</a>
+  </div>
+
+  <!-- HAMBURGER -->
+  <div class="hamburger" id="hamburger">
+    <i class="fas fa-bars"></i>
+  </div>
+
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+  <div class="hero-left">
+
+        <span class="tag">
+            <i class="fas fa-fire"></i>
+            Marketplace Peruano Moderno
+        </span>
+
+    <h1>
+      Compra y vende con
+      <span>confianza</span>
+    </h1>
+
+    <p>
+      Conecta emprendedores y compradores en una plataforma
+      moderna, segura y diseñada para el futuro digital.
+    </p>
+
+    <div class="hero-buttons">
+
+      <a href="#" class="btn-primary">
+        Explorar
+      </a>
+
+      <a href="#" class="btn-dark">
+        Publicar
+      </a>
+
+    </div>
+
+    <div class="hero-stats">
+
+      <div class="stat-box">
+        <h3>+12K</h3>
+        <span>Usuarios</span>
+      </div>
+
+      <div class="stat-box">
+        <h3>+8K</h3>
+        <span>Ventas</span>
+      </div>
+
+      <div class="stat-box">
+        <h3>4.9★</h3>
+        <span>Valoración</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="hero-right">
+
+    <div class="floating-card">
+
+      <img src="/audifonos.png" alt="producto">
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+
+  <div class="section-title">
+    <h2>Nuestra Plataforma</h2>
+
+    <p>
+      Impulsamos emprendedores peruanos hacia el futuro digital.
+    </p>
+  </div>
+
+  <div class="about-grid">
+
+    <div class="about-card">
+
+      <i class="fas fa-bullseye"></i>
+
+      <h3>Objetivo</h3>
+
+      <p>
+        Crear oportunidades digitales para emprendedores
+        mediante tecnología moderna.
+      </p>
+
+    </div>
+
+    <div class="about-card">
+
+      <i class="fas fa-eye"></i>
+
+      <h3>Visión</h3>
+
+      <p>
+        Ser el marketplace peruano más innovador y confiable
+        del país.
+      </p>
+
+    </div>
+
+    <div class="about-card">
+
+      <i class="fas fa-heart"></i>
+
+      <h3>Misión</h3>
+
+      <p>
+        Conectar personas y negocios con experiencias digitales
+        rápidas y seguras.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+
+  <div class="feature">
+
+    <i class="fas fa-bolt"></i>
+
+    <h3>Publicación rápida</h3>
+
+    <p>
+      Publica productos en segundos.
+    </p>
+
+  </div>
+
+  <div class="feature">
+
+    <i class="fas fa-shield-halved"></i>
+
+    <h3>Pagos seguros</h3>
+
+    <p>
+      Protección total para compradores y vendedores.
+    </p>
+
+  </div>
+
+  <div class="feature">
+
+    <i class="fas fa-truck-fast"></i>
+
+    <h3>Delivery rápido</h3>
+
+    <p>
+      Envíos modernos y seguimiento en tiempo real.
+    </p>
+
+  </div>
+
+</section>
+
+<!-- CTA -->
+<section class="cta">
+
+  <h2>
+    Empieza hoy con EmpreNet
+  </h2>
+
+  <p>
+    Haz crecer tu emprendimiento usando tecnología moderna.
+  </p>
+
+  <a href="/register" class="btn-primary">
+    Crear Cuenta
+  </a>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+
+  <h2>EmpreNet</h2>
+
+  <p>
+    Marketplace moderno para emprendedores peruanos.
+  </p>
+
+  <div class="footer-links">
+
+    <a href="#">Privacidad</a>
+    <a href="#">Términos</a>
+    <a href="#">Contacto</a>
+
+  </div>
+
+</footer>
+
+<!-- SCRIPT -->
+<script>
+
+  const hamburger = document.getElementById("hamburger");
+  const menu = document.getElementById("menu");
+
+  hamburger.addEventListener("click", () => {
+    menu.classList.toggle("active");
+  });
+
+</script>
+
+</body>
+</html>
