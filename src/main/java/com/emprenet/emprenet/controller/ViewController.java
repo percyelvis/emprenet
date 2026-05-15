@@ -8,12 +8,11 @@ public class ViewController {
 
     @GetMapping("/")
     public String home() {
-        return "index"; // index.html
+        return "Index"; // ✔ correcto
     }
 
     @GetMapping("/register")
     public String register() {
-        return "Formulario"; // register.html
+        return "Formulario"; // ✔ si tu archivo es formulario.html
     }
-
 }
